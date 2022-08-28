@@ -22,8 +22,8 @@ func ConcurrentlySelectWithBufferedChannels() {
 	y := make(chan int)
 
 	// only <LIMITER> func calls in parralel is possible
-	go generateValueCuncurrentlyWithBufferedChannels(x, limiter)
-	go generateValueCuncurrentlyWithBufferedChannels(y, limiter)
+	go generateValueConcurrentlyWithBufferedChannels(x, limiter)
+	go generateValueConcurrentlyWithBufferedChannels(y, limiter)
 
 	select {
 	case a := <-x:
@@ -34,7 +34,7 @@ func ConcurrentlySelectWithBufferedChannels() {
 }
 
 func ConcurrentlyWithBufferedChannels() {
-	fmt.Println("TransmittingCuncurrently")
+	fmt.Println("TransmittingConcurrently")
 
 	const (
 		LIMITER          = 3
@@ -45,10 +45,10 @@ func ConcurrentlyWithBufferedChannels() {
 	limiter := make(chan int, LIMITER)
 
 	// only <LIMITER> func calls in parralel is possible
-	go generateValueCuncurrentlyWithBufferedChannels(c, limiter)
-	go generateValueCuncurrentlyWithBufferedChannels(c, limiter)
-	go generateValueCuncurrentlyWithBufferedChannels(c, limiter)
-	go generateValueCuncurrentlyWithBufferedChannels(c, limiter)
+	go generateValueConcurrentlyWithBufferedChannels(c, limiter)
+	go generateValueConcurrentlyWithBufferedChannels(c, limiter)
+	go generateValueConcurrentlyWithBufferedChannels(c, limiter)
+	go generateValueConcurrentlyWithBufferedChannels(c, limiter)
 
 	sum := 0
 	i := 0
@@ -65,7 +65,7 @@ func ConcurrentlyWithBufferedChannels() {
 	fmt.Println("Sum:", sum)
 }
 
-func generateValueCuncurrentlyWithBufferedChannels(c chan int, limit chan int) {
+func generateValueConcurrentlyWithBufferedChannels(c chan int, limit chan int) {
 	limit <- 1
 
 	sleepTime := randN.Intn(6)
@@ -78,14 +78,14 @@ func generateValueCuncurrentlyWithBufferedChannels(c chan int, limit chan int) {
 }
 
 func ConcurrentlyWithUnbufferedChannels() {
-	fmt.Println("TransmittingCuncurrently")
+	fmt.Println("TransmittingConcurrently")
 
 	c := make(chan int)
 
-	go generateValueCuncurrentlyWithUnbufferedChannels(c)
-	go generateValueCuncurrentlyWithUnbufferedChannels(c)
-	go generateValueCuncurrentlyWithUnbufferedChannels(c)
-	go generateValueCuncurrentlyWithUnbufferedChannels(c)
+	go generateValueConcurrentlyWithUnbufferedChannels(c)
+	go generateValueConcurrentlyWithUnbufferedChannels(c)
+	go generateValueConcurrentlyWithUnbufferedChannels(c)
+	go generateValueConcurrentlyWithUnbufferedChannels(c)
 
 	sum := 0
 	i := 0
@@ -102,7 +102,7 @@ func ConcurrentlyWithUnbufferedChannels() {
 	fmt.Println("Sum:", sum)
 }
 
-func generateValueCuncurrentlyWithUnbufferedChannels(c chan int) {
+func generateValueConcurrentlyWithUnbufferedChannels(c chan int) {
 	sleepTime := randN.Intn(6)
 	fmt.Println("WithUnbufferedChannels sleepTime", sleepTime)
 	time.Sleep(time.Duration(sleepTime) * time.Second)
